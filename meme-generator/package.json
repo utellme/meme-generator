@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Local meme generator — upload or pick a template, add top/bottom text, download PNG",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test": "node --test test/*.test.js"
   },
   "engines": {
     "node": ">=18"

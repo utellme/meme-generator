@@ -1,9 +1,4 @@
-const PRESETS = [
-  { id: "sunset", label: "Sunset", src: "/templates/sunset.svg" },
-  { id: "ocean", label: "Ocean", src: "/templates/ocean.svg" },
-  { id: "mountain", label: "Mountain", src: "/templates/mountain.svg" },
-  { id: "studio", label: "Studio", src: "/templates/studio.svg" },
-];
+import { PRESETS, FONT_FAMILY, PADDING, wrapText } from "./meme-text.js";
 
 const canvas = document.getElementById("meme-canvas");
 const ctx = canvas.getContext("2d");
@@ -19,8 +14,9 @@ const fontSizeValue = document.getElementById("font-size-value");
 let currentImage = null;
 let activePresetId = null;
 
-const FONT_FAMILY = 'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif';
-const PADDING = 16;
+function measureLineWidth(line) {
+  return ctx.measureText(line).width;
+}
 
 function setImageLoaded(loaded) {
   canvas.classList.toggle("visible", loaded);
@@ -37,26 +33,9 @@ function loadImageFromSrc(src) {
   });
 }
 
-function wrapText(text, maxWidth, fontSize) {
-  if (!text.trim()) return [];
-
+function wrapTextForCanvas(text, maxWidth, fontSize) {
   ctx.font = `bold ${fontSize}px ${FONT_FAMILY}`;
-  const words = text.trim().split(/\s+/);
-  const lines = [];
-  let currentLine = "";
-
-  for (const word of words) {
-    const testLine = currentLine ? `${currentLine} ${word}` : word;
-    if (ctx.measureText(testLine).width <= maxWidth) {
-      currentLine = testLine;
-    } else {
-      if (currentLine) lines.push(currentLine);
-      currentLine = word;
-    }
-  }
-
-  if (currentLine) lines.push(currentLine);
-  return lines;
+  return wrapText(text, maxWidth, fontSize, measureLineWidth);
 }
 
 function drawTextBlock(text, startY, direction) {
@@ -64,7 +43,7 @@ function drawTextBlock(text, startY, direction) {
 
   const fontSize = Number(fontSizeInput.value);
   const maxWidth = canvas.width * 0.9;
-  const lines = wrapText(text, maxWidth, fontSize);
+  const lines = wrapTextForCanvas(text, maxWidth, fontSize);
   const lineHeight = fontSize * 1.15;
   const x = canvas.width / 2;
 

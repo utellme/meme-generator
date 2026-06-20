@@ -1,6 +1,10 @@
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
+import http from "node:http";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3848;
 const ROOT = path.join(__dirname, "public");
@@ -25,10 +29,10 @@ function sendJson(res, status, data) {
   res.end(JSON.stringify(data));
 }
 
-function serveStatic(req, res) {
+function serveStatic(req, res, root = ROOT) {
   const urlPath = req.url.split("?")[0];
-  let filePath = path.join(ROOT, urlPath === "/" ? "index.html" : urlPath);
-  if (!filePath.startsWith(ROOT)) {
+  let filePath = path.join(root, urlPath === "/" ? "index.html" : urlPath);
+  if (!filePath.startsWith(root)) {
     res.writeHead(403);
     res.end("Forbidden");
     return;
@@ -46,20 +50,41 @@ function serveStatic(req, res) {
   });
 }
 
-const server = http.createServer((req, res) => {
+function handleRequest(req, res, options = {}) {
+  const port = options.port ?? PORT;
+
   if (req.method === "GET" && req.url === "/api/health") {
-    sendJson(res, 200, { ok: true, port: PORT });
+    sendJson(res, 200, { ok: true, port });
     return;
   }
 
-  serveStatic(req, res);
-});
+  serveStatic(req, res, options.root ?? ROOT);
+}
 
-server.listen(PORT, "127.0.0.1", () => {
-  console.log("");
-  console.log("  Meme Generator");
-  console.log(`  → http://localhost:${PORT}`);
-  console.log("");
-  console.log("  Press Ctrl+C to stop");
-  console.log("");
-});
+function createServer(options = {}) {
+  return http.createServer((req, res) => handleRequest(req, res, options));
+}
+
+const isMain = process.argv[1] === fileURLToPath(import.meta.url);
+
+if (isMain) {
+  const server = createServer();
+  server.listen(PORT, "127.0.0.1", () => {
+    console.log("");
+    console.log("  Meme Generator");
+    console.log(`  → http://localhost:${PORT}`);
+    console.log("");
+    console.log("  Press Ctrl+C to stop");
+    console.log("");
+  });
+}
+
+export {
+  PORT,
+  ROOT,
+  MIME,
+  sendJson,
+  serveStatic,
+  handleRequest,
+  createServer,
+};

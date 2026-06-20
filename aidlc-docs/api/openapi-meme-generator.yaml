@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: Meme Generator API
+  description: |
+    Local development server for the Meme Generator web app.
+    Serves static assets from `meme-generator/public/` and exposes a health check.
+    All meme rendering runs client-side in the browser (HTML5 Canvas); the server does not process images.
+  version: 1.0.0
+  contact:
+    name: Meme Generator (local prototype)
+
+servers:
+  - url: http://localhost:3848
+    description: Default local server (override with PORT env var)
+
+tags:
+  - name: Health
+    description: Service health and readiness
+  - name: Static
+    description: Static file delivery (not JSON APIs)
+
+paths:
+  /api/health:
+    get:
+      tags: [Health]
+      summary: Health check
+      description: Returns service status and the port the server is bound to.
+      operationId: getHealth
+      responses:
+        "200":
+          description: Service is running
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+              example:
+                ok: true
+                port: 3848
+
+  /:
+    get:
+      tags: [Static]
+      summary: Landing page
+      description: Returns `index.html` — the meme editor UI.
+      operationId: getIndex
+      responses:
+        "200":
+          description: HTML page
+          content:
+            text/html:
+              schema:
+                type: string
+        "404":
+          description: File not found
+
+  /templates/{filename}:
+    get:
+      tags: [Static]
+      summary: Preset template image
+      description: Serves bundled SVG (or other image) templates from `public/templates/`.
+      operationId: getTemplate
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+            example: sunset.svg
+      responses:
+        "200":
+          description: Template file
+          content:
+            image/svg+xml:
+              schema:
+                type: string
+                format: binary
+        "403":
+          description: Path traversal blocked
+        "404":
+          description: Template not found
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required: [ok, port]
+      properties:
+        ok:
+          type: boolean
+          description: Always `true` when the server responds
+          example: true
+        port:
+          type: integer
+          description: TCP port the server is listening on
+          example: 3848
+
+  securitySchemes: {}
+
+security: []

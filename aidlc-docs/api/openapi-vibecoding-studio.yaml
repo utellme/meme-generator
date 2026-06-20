@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Vibe Coding Studio API
+  description: |
+    Local development server for the Vibe Coding Studio landing page.
+    Serves static marketing UI and a small JSON API for listing workspace projects
+    and retrieving launch commands. Project launch is advisory only — the API returns
+    terminal commands rather than spawning processes remotely.
+  version: 1.0.0
+  contact:
+    name: Vibe Coding Studio (local prototype)
+
+servers:
+  - url: http://localhost:3847
+    description: Default local server (override with PORT env var)
+
+tags:
+  - name: Health
+    description: Service health and readiness
+  - name: Projects
+    description: Workspace project catalog and launch helpers
+  - name: Static
+    description: Static file delivery
+
+paths:
+  /api/health:
+    get:
+      tags: [Health]
+      summary: Health check
+      description: Returns service status and the port the server is bound to.
+      operationId: getHealth
+      responses:
+        "200":
+          description: Service is running
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+              example:
+                ok: true
+                port: 3847
+
+  /api/projects:
+    get:
+      tags: [Projects]
+      summary: List workspace projects
+      description: Returns the catalog of projects available from the Vibe Coding Studio landing page.
+      operationId: listProjects
+      responses:
+        "200":
+          description: Project list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectListResponse"
+              example:
+                projects:
+                  - id: guess-game
+                    name: Number Guessing Game
+                    description: CLI game — random 1–100, shows each guess with hints.
+                    command: python3 guess_game.py
+                    cwd: /Users/example/ClaudeProject-With-AIDLC
+                    type: terminal
+
+  /api/launch/{projectId}:
+    post:
+      tags: [Projects]
+      summary: Get launch command for a project
+      description: |
+        Returns the shell command and working directory needed to run the project locally.
+        Does not execute the command server-side; the client displays or copies it for the user.
+      operationId: launchProject
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: Project identifier from `/api/projects`
+          schema:
+            type: string
+            example: guess-game
+      responses:
+        "200":
+          description: Launch instructions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LaunchResponse"
+              example:
+                message: |
+                  Run this in your terminal:
+
+                  cd /Users/example/ClaudeProject-With-AIDLC
+                  python3 guess_game.py
+                command: python3 guess_game.py
+                cwd: /Users/example/ClaudeProject-With-AIDLC
+        "404":
+          description: Unknown project ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: Project not found
+
+  /:
+    get:
+      tags: [Static]
+      summary: Landing page
+      description: Returns `index.html` — the Vibe Coding marketing landing page.
+      operationId: getIndex
+      responses:
+        "200":
+          description: HTML page
+          content:
+            text/html:
+              schema:
+                type: string
+        "404":
+          description: File not found
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required: [ok, port]
+      properties:
+        ok:
+          type: boolean
+          example: true
+        port:
+          type: integer
+          example: 3847
+
+    Project:
+      type: object
+      required: [id, name, description, command, cwd, type]
+      properties:
+        id:
+          type: string
+          description: Unique project slug used in launch URLs
+          example: guess-game
+        name:
+          type: string
+          description: Display name
+          example: Number Guessing Game
+        description:
+          type: string
+          description: Short summary shown on the landing page
+        command:
+          type: string
+          description: Shell command to start the project
+          example: python3 guess_game.py
+        cwd:
+          type: string
+          description: Absolute path to run the command from
+        type:
+          type: string
+          description: Launch category
+          enum: [terminal]
+          example: terminal
+
+    ProjectListResponse:
+      type: object
+      required: [projects]
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+
+    LaunchResponse:
+      type: object
+      required: [message, command, cwd]
+      properties:
+        message:
+          type: string
+          description: Human-readable instructions including `cd` and command
+        command:
+          type: string
+          description: Command portion only
+        cwd:
+          type: string
+          description: Working directory for the command
+
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          example: Project not found
+
+  securitySchemes: {}
+
+security: []

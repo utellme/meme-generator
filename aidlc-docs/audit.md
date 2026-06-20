@@ -79,3 +79,11 @@
 **Context**: CONSTRUCTION - Build and Test
 
 ---
+
+## Parallel Worktrees Setup
+**Timestamp**: 2026-06-19T12:00:00Z
+**User Input**: "follow up in a worktree so can run multiple agents"
+**AI Response**: Created initial git commit (required for worktrees). Set up three parallel worktrees under ~/.cursor/worktrees/ClaudeProject-With-AIDLC/ for feat/meme-enhancements, feat/vibecoding-integration, and feat/guess-game-improvements. Added scripts/new-worktree.sh helper."
+**Context**: Infrastructure — parallel agent worktrees
+
+---

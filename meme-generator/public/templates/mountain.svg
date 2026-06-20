@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="mtn" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5c6bc0"/>
+      <stop offset="100%" stop-color="#3949ab"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="#b3e5fc"/>
+  <polygon points="0,600 200,220 400,600" fill="#78909c"/>
+  <polygon points="150,600 420,180 700,600" fill="url(#mtn)"/>
+  <polygon points="500,600 650,280 800,600" fill="#546e7a"/>
+  <rect y="480" width="800" height="120" fill="#558b2f"/>
+</svg>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vibe Coding — describe your app in plain English, let AI build it, launch locally in minutes." />
+  <title>Vibe Coding — Build with AI, Launch Locally</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="mesh" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a class="nav-brand" href="#top">
+      <span class="brand-mark">◈</span>
+      Vibe Coding
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#how">How it works</a>
+      <a href="#tools">Tools</a>
+      <a href="#launch" class="nav-cta">Launch locally</a>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="hero-content">
+      <p class="pill">Coined by Andrej Karpathy · AI-native development · 2025–2026</p>
+      <h1>
+        Stop typing every line.<br />
+        <em>Start describing the vibe.</em>
+      </h1>
+      <p class="hero-sub">
+        Vibe coding is a workflow where you guide AI with natural language —
+        it generates, refines, and debugs your app while you focus on ideas,
+        UX, and shipping.
+      </p>
+      <div class="hero-actions">
+        <a href="#launch" class="btn btn-primary">Run this landing page locally</a>
+        <a href="#about" class="btn btn-secondary">Learn more</a>
+      </div>
+      <div class="hero-terminal">
+        <div class="terminal-bar">
+          <span></span><span></span><span></span>
+          <code>terminal</code>
+        </div>
+        <pre><span class="t-dim">$</span> <span class="t-cmd">./scripts/launch-vibecoding-landing.sh</span>
+<span class="t-out">✨ Vibe Coding landing page</span>
+<span class="t-out">→ http://localhost:3847</span></pre>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="section">
+    <div class="section-inner">
+      <p class="section-label">What is vibe coding?</p>
+      <h2>The shift from syntax to intent</h2>
+      <p class="section-lead">
+        Traditional coding means mastering languages, frameworks, and boilerplate.
+        Vibe coding flips that: you describe what you want, iterate in conversation,
+        and let AI handle implementation — then you run and refine on your own machine.
+      </p>
+      <div class="stat-row">
+        <article class="stat">
+          <strong>Describe</strong>
+          <span>Features, flows, and constraints in plain English</span>
+        </article>
+        <article class="stat">
+          <strong>Generate</strong>
+          <span>AI writes, edits, and debugs the codebase</span>
+        </article>
+        <article class="stat">
+          <strong>Launch</strong>
+          <span>Test locally, iterate fast, ship when it feels right</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section section-alt">
+    <div class="section-inner">
+      <p class="section-label">How it works</p>
+      <h2>Three steps from idea to running app</h2>
+      <ol class="timeline">
+        <li>
+          <span class="timeline-num">01</span>
+          <div>
+            <h3>Prompt your vision</h3>
+            <p>Tell the AI what to build — pages, logic, styling, edge cases. Be specific about the experience you want.</p>
+          </div>
+        </li>
+        <li>
+          <span class="timeline-num">02</span>
+          <div>
+            <h3>Iterate with AI</h3>
+            <p>Review output, ask for changes, fix bugs through conversation. Use Cursor, Claude, or a vibe coding CLI.</p>
+          </div>
+        </li>
+        <li>
+          <span class="timeline-num">03</span>
+          <div>
+            <h3>Run on localhost</h3>
+            <p>Launch the app on your machine, verify behavior, and keep refining until the vibe matches your vision.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-label">Why developers love it</p>
+      <h2>Build faster without losing control</h2>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Rapid prototyping</h3>
+          <p>Go from idea to working UI in minutes instead of hours of scaffolding.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Focus on product</h3>
+          <p>Spend energy on user flows and outcomes, not boilerplate and config.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">🔄</div>
+          <h3>Easy iteration</h3>
+          <p>Refine with natural language — “make it darker”, “add auth”, “fix the mobile layout”.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">🖥️</div>
+          <h3>Local-first</h3>
+          <p>Run everything on your machine. No lock-in. Your code stays in your repo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools" class="section section-alt">
+    <div class="section-inner">
+      <p class="section-label">Ecosystem</p>
+      <h2>Popular vibe coding tools (2026)</h2>
+      <div class="tool-cards">
+        <article class="tool-card tool-card-highlight">
+          <span class="tool-tag">This project</span>
+          <h3>Vibe Coding Landing</h3>
+          <p>Static landing page + local Node server. No API keys. Launch in one command.</p>
+          <code>./scripts/launch-vibecoding-landing.sh</code>
+        </article>
+        <article class="tool-card">
+          <h3>Cursor / IDE + AI</h3>
+          <p>AI-native editor workflow. Best for full projects with rich context.</p>
+        </article>
+        <article class="tool-card">
+          <h3>VibeCoding CLI</h3>
+          <p>Terminal assistant with plan, agent, and yolo modes. Requires an API key.</p>
+        </article>
+        <article class="tool-card">
+          <h3>VibeCoder Platform</h3>
+          <p>Self-hosted IDE with Postgres and Redis. Heavier setup, full environment.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="launch" class="section launch-section">
+    <div class="section-inner launch-box">
+      <p class="section-label">Get started</p>
+      <h2>Launch this landing page on your machine</h2>
+      <p class="section-lead">You're already viewing it if the server is running. Otherwise, use the commands below.</p>
+
+      <div class="launch-steps">
+        <div class="launch-step">
+          <span>1</span>
+          <div>
+            <p>Open a terminal in the project root</p>
+            <div class="code-row">
+              <code id="cmd-cd">cd /Users/dvalia/Development/ClaudeProject-With-AIDLC</code>
+              <button class="copy-btn" data-copy-target="cmd-cd">Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="launch-step">
+          <span>2</span>
+          <div>
+            <p>Start the local server</p>
+            <div class="code-row">
+              <code id="cmd-launch">./scripts/launch-vibecoding-landing.sh</code>
+              <button class="copy-btn" data-copy-target="cmd-launch">Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="launch-step">
+          <span>3</span>
+          <div>
+            <p>Open in your browser</p>
+            <div class="code-row">
+              <code id="cmd-url">http://localhost:3847</code>
+              <button class="copy-btn" data-copy-target="cmd-url">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="server-status" class="server-status" aria-live="polite"></div>
+
+      <div class="demo-projects">
+        <h3>Demo project in this repo</h3>
+        <div id="project-list" class="project-list"></div>
+        <pre id="launch-output" class="launch-output hidden"></pre>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">◈ Vibe Coding</span>
+      <div class="footer-links">
+        <a href="https://cloud.google.com/discover/what-is-vibe-coding" target="_blank" rel="noopener">Google Cloud guide</a>
+        <a href="https://github.com/startvibecoding/vibecoding" target="_blank" rel="noopener">VibeCoding CLI</a>
+      </div>
+      <span class="footer-note">Running locally · No cloud required</span>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

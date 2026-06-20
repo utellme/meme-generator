@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create memes locally — pick a template or upload an image, add top and bottom text, download as PNG." />
+  <title>Meme Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Meme Generator</h1>
+    <p class="subtitle">Pick a template or upload an image, add text, download your meme.</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="image-heading">
+      <h2 id="image-heading">Image</h2>
+
+      <label class="upload-btn">
+        <input type="file" id="image-upload" accept="image/*" hidden />
+        Upload image
+      </label>
+
+      <p class="section-label">Or choose a template</p>
+      <div class="preset-grid" id="preset-grid" role="listbox" aria-label="Preset templates"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="text-heading">
+      <h2 id="text-heading">Text</h2>
+
+      <label class="field">
+        <span>Top text</span>
+        <input type="text" id="top-text" placeholder="WHEN YOU FINALLY SHIP" maxlength="200" />
+      </label>
+
+      <label class="field">
+        <span>Bottom text</span>
+        <input type="text" id="bottom-text" placeholder="AND IT ACTUALLY WORKS" maxlength="200" />
+      </label>
+
+      <label class="field">
+        <span>Font size: <output id="font-size-value" for="font-size">48</output>px</span>
+        <input type="range" id="font-size" min="24" max="120" value="48" step="2" />
+      </label>
+    </section>
+
+    <section class="panel panel-preview" aria-labelledby="preview-heading">
+      <h2 id="preview-heading">Preview</h2>
+
+      <div class="canvas-wrap">
+        <canvas id="meme-canvas" aria-label="Meme preview"></canvas>
+        <p id="empty-state" class="empty-state">Upload an image or pick a template to start</p>
+      </div>
+
+      <button type="button" id="download-btn" class="download-btn" disabled>
+        Download meme
+      </button>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

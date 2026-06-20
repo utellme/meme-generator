@@ -35,6 +35,32 @@ npm start
 
 This builds with Vite and serves the `dist/` folder via Node.
 
+## Deploy to Vercel
+
+This repo is a monorepo; the app lives in **`meme-generator/`**. Vercel must build from that subdirectory (configured in root `vercel.json`).
+
+### Option A — Vercel CLI
+
+From the **repository root** (not `meme-generator/`):
+
+```bash
+vercel login
+vercel link          # link falcon007/meme-generator once
+vercel env add VITE_INSTANT_APP_ID production   # your InstantDB app ID
+vercel --prod
+```
+
+Production URL: **https://meme-generator-one-black.vercel.app**
+
+### Option B — GitHub integration
+
+1. Import the repo at [vercel.com/new](https://vercel.com/new).
+2. Leave **Root Directory** as `.` — root `vercel.json` runs install/build in `meme-generator/`.
+3. Add environment variable **`VITE_INSTANT_APP_ID`** (your InstantDB app ID).
+4. Deploy.
+
+Push schema and permissions to InstantDB before testing the live gallery (see below).
+
 ## InstantDB setup
 
 1. Copy `.env.example` to `.env` if needed (app ID is pre-filled).

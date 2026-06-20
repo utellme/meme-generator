@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --prefix meme-generator",
+  "buildCommand": "npm run build --prefix meme-generator",
+  "outputDirectory": "meme-generator/dist"
+}

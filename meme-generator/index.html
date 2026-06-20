@@ -3,21 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Create memes locally — pick a template or upload an image, add top and bottom text, download as PNG." />
+  <meta name="description" content="Create image and text memes, save to a live gallery with InstantDB." />
   <title>Meme Generator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <header class="header">
     <h1>Meme Generator</h1>
-    <p class="subtitle">Pick a template or upload an image, add text, download your meme.</p>
+    <p class="subtitle">Image or text-only memes — save to a live gallery powered by InstantDB.</p>
   </header>
 
+  <div class="mode-toggle" role="group" aria-label="Meme mode">
+    <button type="button" id="mode-image" class="mode-btn active" aria-pressed="true">Image meme</button>
+    <button type="button" id="mode-text" class="mode-btn" aria-pressed="false">Text-only meme</button>
+  </div>
+
   <main class="layout">
-    <section class="panel" aria-labelledby="image-heading">
+    <section class="panel" id="image-panel" aria-labelledby="image-heading">
       <h2 id="image-heading">Image</h2>
 
       <label class="upload-btn">
@@ -27,6 +31,15 @@
 
       <p class="section-label">Or choose a template</p>
       <div class="preset-grid" id="preset-grid" role="listbox" aria-label="Preset templates"></div>
+    </section>
+
+    <section class="panel" id="text-bg-panel" aria-labelledby="bg-heading" hidden>
+      <h2 id="bg-heading">Background</h2>
+      <div class="bg-swatches" id="bg-swatches" role="listbox" aria-label="Background colors"></div>
+      <label class="field">
+        <span>Custom color</span>
+        <input type="color" id="custom-bg" value="#1a1a2e" />
+      </label>
     </section>
 
     <section class="panel" aria-labelledby="text-heading">
@@ -56,12 +69,20 @@
         <p id="empty-state" class="empty-state">Upload an image or pick a template to start</p>
       </div>
 
-      <button type="button" id="download-btn" class="download-btn" disabled>
-        Download meme
-      </button>
+      <div class="preview-actions">
+        <button type="button" id="save-btn" class="save-btn" disabled>Save to gallery</button>
+        <button type="button" id="download-btn" class="download-btn" disabled>Download PNG</button>
+      </div>
+      <p id="save-status" class="save-status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel panel-gallery" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading">Gallery</h2>
+      <p class="section-label">Live feed — open another tab to see updates in real time</p>
+      <div id="gallery-container"></div>
     </section>
   </main>
 
-  <script type="module" src="/app.js"></script>
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>

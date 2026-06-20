@@ -31,4 +31,4 @@
 ## Current Status
 - Number guessing game: `guess_game.py`
 - Vibe Coding Studio: `vibecoding-studio/` — launch with `./scripts/launch-vibecoding-studio.sh` → http://localhost:3847
-- Meme Generator: `meme-generator/` — launch with `./scripts/launch-meme-generator.sh` → http://localhost:3848
+- Meme Generator: `meme-generator/` — Vite + InstantDB (app `4285d49b-448b-4bc0-90df-b0a82a2f20ba`); image + text-only modes, live gallery; launch with `./scripts/launch-meme-generator.sh` → http://localhost:3848

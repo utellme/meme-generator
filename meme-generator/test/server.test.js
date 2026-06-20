@@ -51,13 +51,7 @@ describe("createServer", () => {
     assert.equal(res.status, 200);
     assert.match(res.headers["content-type"], /text\/html/);
     assert.match(res.body.toString(), /Meme Generator/);
-  });
-
-  it("GET /app.js serves JavaScript module", async () => {
-    const res = await request(server, "/app.js");
-    assert.equal(res.status, 200);
-    assert.match(res.headers["content-type"], /javascript/);
-    assert.match(res.body.toString(), /renderMeme/);
+    assert.match(res.body.toString(), /Save to gallery/);
   });
 
   it("GET /templates/sunset.svg serves SVG template", async () => {
@@ -72,7 +66,7 @@ describe("createServer", () => {
     assert.equal(res.body.toString(), "Not found");
   });
 
-  it("GET path traversal outside public root returns 403", async () => {
+  it("GET path traversal outside dist root returns 403", async () => {
     const res = await request(server, "/../server.js");
     assert.equal(res.status, 403);
     assert.equal(res.body.toString(), "Forbidden");
@@ -89,7 +83,7 @@ describe("MIME types", () => {
 });
 
 describe("ROOT", () => {
-  it("points at the public directory", () => {
-    assert.match(ROOT, /public$/);
+  it("points at the dist directory", () => {
+    assert.match(ROOT, /dist$/);
   });
 });

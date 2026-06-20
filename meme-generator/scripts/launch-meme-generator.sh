@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Launch Meme Generator on http://localhost:3848
+# Launch Meme Generator on http://localhost:3848 (Vite dev server)
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -10,5 +10,10 @@ if ! command -v node >/dev/null 2>&1; then
   exit 1
 fi
 
-echo "Starting Meme Generator..."
-node server.js
+if [ ! -d node_modules ]; then
+  echo "Installing dependencies..."
+  npm install
+fi
+
+echo "Starting Meme Generator (dev)..."
+npm run dev

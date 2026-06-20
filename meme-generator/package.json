@@ -1,17 +1,25 @@
 {
   "name": "meme-generator",
-  "version": "1.0.0",
-  "description": "Local meme generator — upload or pick a template, add top/bottom text, download PNG",
+  "version": "2.0.0",
+  "description": "Meme generator with image and text-only modes, InstantDB gallery",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
+    "dev": "vite --port 3848",
+    "build": "vite build",
+    "start": "npm run build && node server.js",
+    "pretest": "npm run build",
     "test": "node --test test/*.test.js"
   },
   "engines": {
     "node": ">=18"
   },
-  "keywords": ["meme", "generator", "canvas", "local"],
+  "dependencies": {
+    "@instantdb/core": "^0.22.167"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  },
+  "keywords": ["meme", "generator", "canvas", "instantdb"],
   "license": "MIT"
 }

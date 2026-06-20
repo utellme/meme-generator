@@ -95,3 +95,27 @@
 **Context**: Documentation — API reference
 
 ---
+
+## Meme Generator InstantDB Upgrade
+**Timestamp**: 2026-06-20T12:00:00Z
+**User Input**: "i want to create a full text meme generator. Create an instant DB.  here is my public id: 4285d49b-448b-4bc0-90df-b0a82a2f20ba"
+**AI Response**: Planned and implemented InstantDB integration: Vite build, image + text-only meme modes, real-time gallery, schema/perms, app ID in .env."
+**Context**: Code Generation — meme-generator InstantDB upgrade
+
+---
+
+## Meme Generator InstantDB Upgrade — Execute
+**Timestamp**: 2026-06-20T12:30:00Z
+**User Input**: "execute the plan"
+**AI Response**: User switched to Agent mode; executing full implementation."
+**Context**: Code Generation — execution start
+
+---
+
+## Meme Gallery Upvotes
+**Timestamp**: 2026-06-20T14:00:00Z
+**User Input**: "want to enhance the meme-generator project such as the user can upvote the meme imagees that are posted"
+**AI Response**: Implemented unlimited upvote counter on memes entity, gallery upvote button, Newest/Top voted sort toggle, gallery-sort unit tests."
+**Context**: Code Generation — meme upvote feature
+
+---

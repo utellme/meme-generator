@@ -5,7 +5,11 @@ import {
   PADDING,
   FONT_FAMILY,
   wrapText,
-} from "../public/meme-text.js";
+  TEXT_CANVAS_WIDTH,
+  TEXT_CANVAS_HEIGHT,
+  getTextCanvasDimensions,
+  BACKGROUND_COLORS,
+} from "../src/meme-text.js";
 
 /** Deterministic width: 10px per character */
 function charWidthMeasure(line) {
@@ -33,6 +37,22 @@ describe("constants", () => {
     assert.equal(PADDING, 16);
     assert.match(FONT_FAMILY, /Impact/);
   });
+
+  it("exports text canvas dimensions", () => {
+    assert.equal(TEXT_CANVAS_WIDTH, 800);
+    assert.equal(TEXT_CANVAS_HEIGHT, 600);
+    assert.deepEqual(getTextCanvasDimensions(), {
+      width: 800,
+      height: 600,
+    });
+  });
+
+  it("defines background color swatches", () => {
+    assert.ok(BACKGROUND_COLORS.length >= 4);
+    for (const swatch of BACKGROUND_COLORS) {
+      assert.match(swatch.value, /^#[0-9a-f]{6}$/i);
+    }
+  });
 });
 
 describe("wrapText", () => {
@@ -48,7 +68,6 @@ describe("wrapText", () => {
   });
 
   it("wraps text onto multiple lines when width exceeded", () => {
-    // "ONE TWO THREE" = 13 chars = 130px; maxWidth 80 forces breaks
     const result = wrapText("ONE TWO THREE", 80, 48, charWidthMeasure);
     assert.deepEqual(result, ["ONE TWO", "THREE"]);
   });
